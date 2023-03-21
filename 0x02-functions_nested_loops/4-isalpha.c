@@ -1,18 +1,17 @@
 #include "main.h"
 /**
- *main - check the code
- *Return: Always 0.
+ * isalpha - check the code
+ * Return: Always 0.
  */
-int main(void)
+int isalpha(void)
 {
-int n;
-n = 0;
-printf("%d\n", print_sign(n));
-n = 98;
-printf("%d\n", print_sign(n));
-n = 0xff;
-printf("%d\n", print_sign(n));
-n = -1;
-printf("%d\n", print_sign(n));
+if ((c >= 97 && c <= 122) | (c >= 65 && c <= 90))
+{
+return (1);
+}
+else
+{
 return (0);
+}
+_putchar('\n');
 }
