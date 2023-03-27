@@ -1,8 +1,9 @@
 #include "main.h"
-#include <unistd.h>
+#include <stdio.h>
 /**
  * print_rev - prints a string in reverse followed by a new line
  * @s: the string to be printed
+ * Return: void
  */
 void print_rev(char *s)
 {
@@ -11,9 +12,9 @@ while (s[len] != '\0')
 {
 len++;
 }
-for (int i = len - 1; i >= 0; i--)
+for (len -= 1; len >= 0; len--)
 {
-write(STDOUT_FILENO, &s[i], 1);
+_putchar(s[len]);
 }
-write(STDOUT_FILENO, "\n", 1);
+_putchar('\n');
 }
