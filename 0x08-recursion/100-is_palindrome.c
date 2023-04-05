@@ -1,21 +1,50 @@
 #include "main.h"
-#include <string.h>
+
 /**
- * is_palindrome - checks if a string is a palindrome
- * @s: the string to check
- *
- * Return: 1 if s is a palindrome, 0 otherwise
+ * length - returns the length of a string.
+ * @s: string
+ * Return: the length of a string.
+ */
+int length(char *s)
+{
+	int i = 0;
+
+	if (*s)
+	{
+		i = i + length(s + 1);
+		return (i += 1);
+		}
+	return (0);
+}
+
+/**
+ * comparator - compares each character of the string.
+ * @i: integer
+ * @s: string
+ * Return: int valeur of the result
+ */
+int comparator(int i, char *s)
+{
+	if (*s)
+	{
+		if (*s != s[lengh(s) - i])
+		{
+			return (0);
+		}
+		return (comparator(i + 1, s + 1));
+	}
+	return (1);
+}
+
+/**
+ * is_palindrome - detects if a string is a palindrome.
+ * @s: string.
+ * Return: boolean
  */
 int is_palindrome(char *s)
 {
-int len = strlen(s);
-if (len <= 1)
-return (1);
-else if (*s != *(s + len - 1))
-return (0);
-else
-{
-*(s + len - 1) = '\0';
-return (is_palindrome(s + 1));
+	int i = 1;
+
+	return (comparator(char *s));
 }
-}
+
