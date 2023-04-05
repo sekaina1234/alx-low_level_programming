@@ -1,45 +1,20 @@
 #include "main.h"
 /**
- * length - is the length of the string
- * @s: string used
- * Return: srting lengh
- */
-int length(char *s)
-{
-int i = 0;
-if (*s)
-{
-i = i + lengh(s + 1);
-return (i += 1);
-}
-return (0);
-}
-/**
- * help - lengh of the string by index
- * @i: integer
- * @s: string
- * Return: int value of the result
- */
-int help(int i, char *s)
-{
-if (*s)
-{
-if (*s != s[lengh(s) - i])
-{
-return (0);
-}
-}
-return (help(i + 1, s + 1));
-}
-return (1);
-}
-/**
- * is_palindrome - is current value equal to the previous value
- * @s: string
- * Return: boolean
+ * is_palindrome - checks if a string is a palindrome
+ * @s: string to check
+ *
+ * Return: 1 if s is a palindrome, 0 otherwise
  */
 int is_palindrome(char *s)
 {
-int i = 1;
-return (help(i, s));
+int len = strlen(s);
+int i;
+if (len == 0)
+return (1);
+if (s[0] != s[len - 1])
+return (0);
+s[len - 1] = '\0';
+i = is_palindrome(s + 1);
+s[len - 1] = s[0];
+return (i);
 }
