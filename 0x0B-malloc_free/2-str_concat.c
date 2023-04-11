@@ -25,7 +25,7 @@ s = malloc((sizeof(char) * len4) +1);
 if (s == NULL)
 return (NULL);
 len2 = 0;
-while (len3 <= len4)
+while (len3 < len4)
 {
 if (len3 <= len1)
 s[len3] = s1[len3];
