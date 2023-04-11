@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include "main.h"
+#include <stdlib.h>
 /**
  * count_words - Counts the number of words in a string.
  * @str: The string to count words in.
