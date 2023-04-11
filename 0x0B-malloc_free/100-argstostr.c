@@ -1,15 +1,14 @@
 #include "main.h"
 #include <stdlib.h>
 /**
- * argstostr - check the code for ALX School students.
- * @ac: ac
- * @av: av
+ * argstostr - convert the params passed to the program to string
+ * @ac: the argument count
+ * @av: the argument vector
  *
- * Return: Always 0.
+ * Return: ...
  */
 char *argstostr(int ac, char **av)
-{
-int i, j, k;
+{int i, j, k;
 char *str;
 int len = 0;
 int total_len = 0;
