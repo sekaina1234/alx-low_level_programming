@@ -4,20 +4,22 @@ int word_len(char *str);
 int count_words(char *str);
 char **strtow(char *str);
 /**
- * word_len - Locates the count ,aking the end
- * @str: The string to count words in.
+ * word_len - Locates the index making the end of the
+ *            first word contained within a string.
+ * @str: The string to be searched.
  *
- * Return: The number of words in the string.
+ * Return: The index marking the end of the initial word pointed to by
+str.
  */
 int word_len(char *str)
 {
-int count = 0, i = 0;
-while (*(str + count) && *(str + count) != ' ')
+int index = 0, len = 0;
+while (*(str + index) && *(str + index) != ' ')
 {
-i++;
-count++;
+len++;
+index++;
 }
-return (i);
+return (len);
 }
 /**
  * count_words - Counts the number of words contaned within a string.
@@ -27,13 +29,15 @@ return (i);
  */
 int count_words(char *str)
 {
-int count = 0, words = 0, i = 0;
-for (count = 0; count < i; count++)
+int index = 0, words = 0, len = 0;
+for (index = 0; *(str + index); index++)
+len++;
+for (index = 0; index < len; index++)
 {
-if (*(str + count) != ' ')
+if (*(str + index) != ' ')
 {
 words++;
-count += word_len(str + count);
+index += word_len(str + index);
 }
 }
 return (words);
@@ -42,13 +46,13 @@ return (words);
  * strtow - Splits a string into words.
  * @str: The string to split.
  *
- * Return: A pointer to an array of strings (words), or NULL if str is NULL or
- * if memory allocation fails.
+ * Return: If str =NULL, str = "", or the function fails - NULL.
+ *         Otherwise - a pointer to an array of strings (words).
  */
 char **strtow(char *str)
 {
 char **strings;
-int count = 0, words, w, letters, l;
+int index = 0, words, w, letters, l;
 if (str == NULL || str[0] == '\0')
 return (NULL);
 words = count_words(str);
@@ -59,9 +63,9 @@ if (strings == NULL)
 return (NULL);
 for (w = 0; w < words; w++)
 {
-while (str[count] == ' ')
-count++;
-letters = word_len(str + count);
+while (str[index] == ' ')
+index++;
+letters = word_len(str + index);
 strings[w] = malloc(sizeof(char) * (letters + 1));
 if (strings[w] == NULL)
 {
@@ -71,7 +75,7 @@ free(strings);
 return (NULL);
 }
 for (l = 0; l < letters; l++)
-strings[w][l] = str[count++];
+strings[w][l] = str[index++];
 strings[w][l] = '\0';
 }
 strings[w] = NULL;
