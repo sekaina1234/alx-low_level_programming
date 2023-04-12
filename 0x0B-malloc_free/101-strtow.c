@@ -1,28 +1,42 @@
 #include "main.h"
 #include <stdlib.h>
+int word_len(char *str);
+int count_words(char *str);
+char **strtow(char *str);
 /**
- * count_words - Counts the number of words in a string.
+ * word_len - Locates the count ,aking the end
  * @str: The string to count words in.
  *
  * Return: The number of words in the string.
  */
-static int count_words(char *str)
+int word_len(char *str)
 {
 int count = 0, i = 0;
-while (str[i])
+while (*(str + count) && *(str + count) != ' ')
 {
-/* Skip spaces */
-while (str[i] && str[i] == ' ')
 i++;
-/* Count word */
-if (str[i] && str[i] != ' ')
-{
 count++;
-while (str[i] && str[i] != ' ')
-i++;
+}
+return (i);
+}
+/**
+ * count_words - Counts the number of words contaned within a string.
+ * @str: The string to be searched.
+ *
+ * Return: The number of words contained within str.
+ */
+int count_words(char *str)
+{
+int count = 0, words = 0, i = 0;
+for (count = 0; count < i; count++)
+{
+if (*(str + count) != ' ')
+{
+words++;
+count += word_len(str + count);
 }
 }
-return (count);
+return (words);
 }
 /**
  * strtow - Splits a string into words.
@@ -33,40 +47,33 @@ return (count);
  */
 char **strtow(char *str)
 {
-char **words;
-int i = 0, j = 0, k = 0, len = 0, count = 0;
-if (str == NULL || *str == '\0')
+char **strings;
+int count = 0, words, w, letters, l;
+if (str == NULL || str[0] == '\0')
 return (NULL);
-count = count_words(str);
-words = malloc(sizeof(char *) * (count + 1));
-if (words == NULL)
+words = count_words(str);
+if (words == 0)
 return (NULL);
-for (i = 0; i < count; i++)
+strings = malloc(sizeof(char *) * (words + 1));
+if (strings == NULL)
+return (NULL);
+for (w = 0; w < words; w++)
 {
-/* Skip spaces */
-while (str[j] && str[j] == ' ')
-j++;
-/* Get word length */
-len = 0;
-while (str[j + len] && str[j + len] != ' ')
-len++;
-/* Allocate memory for word */
-words[i] = malloc(sizeof(char) * (len + 1));
-if (words[i] == NULL)
+while (str[count] == ' ')
+count++;
+letters = word_len(str + count);
+strings[w] = malloc(sizeof(char) * (letters + 1));
+if (strings[w] == NULL)
 {
-/* Free previously allocated memory */
-for (k = 0; k < i; k++)
-free(words[k]);
-free(words);
+for (; w >= 0; w--)
+free(strings[w]);
+free(strings);
 return (NULL);
 }
-/* Copy word into array */
-for (k = 0; k < len; k++)
-words[i][k] = str[j + k];
-words[i][k] = '\0';
-/* Move to next word */
-j += len;
+for (l = 0; l < letters; l++)
+strings[w][l] = str[count++];
+strings[w][l] = '\0';
 }
-words[i] = NULL;
-return (words);
+strings[w] = NULL;
+return (strings);
 }
