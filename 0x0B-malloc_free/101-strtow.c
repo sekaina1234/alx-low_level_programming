@@ -12,11 +12,11 @@ char **strtow(char *str);
  */
 int word_len(char *str)
 {
-int index = 0, len = 0;
-while (*(str + index) && *(str + index) != ' ')
+int flag = 0, len = 0;
+while (*(str + flag) && *(str + flag) != ' ')
 {
 len++;
-index++;
+flag++;
 }
 return (len);
 }
@@ -28,15 +28,15 @@ return (len);
  */
 int count_words(char *str)
 {
-int index = 0, words = 0, len = 0;
-for (index = 0; *(str + index); index++)
+int flag = 0, words = 0, len = 0;
+for (flag = 0; *(str + flag); flag++)
 len++;
-for (index = 0; index < len; index++)
+for (flag = 0; flag < len; flag++)
 {
-if (*(str + index) != ' ')
+if (*(str + flag) != ' ')
 {
 words++;
-index += word_len(str + index);
+flag += word_len(str + flag);
 }
 }
 return (words);
@@ -51,7 +51,7 @@ return (words);
 char **strtow(char *str)
 {
 char **strings;
-int index = 0, words, w, letters, l;
+int flag = 0, words, w, letters, l;
 if (str == NULL || str[0] == '\0')
 return (NULL);
 words = count_words(str);
@@ -62,9 +62,9 @@ if (strings == NULL)
 return (NULL);
 for (w = 0; w < words; w++)
 {
-while (str[index] == ' ')
-index++;
-letters = word_len(str + index);
+while (str[flag] == ' ')
+flag++;
+letters = word_len(str + flag);
 strings[w] = malloc(sizeof(char) * (letters + 1));
 if (strings[w] == NULL)
 {
@@ -74,7 +74,7 @@ free(strings);
 return (NULL);
 }
 for (l = 0; l < letters; l++)
-strings[w][l] = str[index++];
+strings[w][l] = str[flag++];
 strings[w][l] = '\0';
 }
 strings[w] = NULL;
