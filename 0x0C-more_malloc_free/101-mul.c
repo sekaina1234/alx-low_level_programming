@@ -22,22 +22,22 @@ return (c >= '0' && c <= '9');
  */
 int *mul(char *num1, int len1, char *num2, int len2)
 {
-int i, j, k, carry, sum;
+int a, b, c, carry, s;
 int *result;
 result = calloc(len1 + len2, sizeof(int));
 if (result == NULL)
 return (NULL);
-for (i = len1 - 1; i >= 0; i--)
+for (a = len1 - 1; a >= 0; a--)
 {
 carry = 0;
-for (j = len2 - 1; j >= 0; j--)
+for (b = len2 - 1; b >= 0; b--)
 {
-k = i + j + 1;
-sum = carry + result[k] + (num1[i] - '0') * (num2[j] - '0');
-result[k] = sum % 10;
-carry = sum / 10;
+c = a + b + 1;
+s = carry + result[c] + (num1[a] - '0') * (num2[b] - '0');
+result[c] = s % 10;
+carry = s / 10;
 }
-result[i + j + 1] = carry;
+result[a + b + 1] = carry;
 }
 return (result);
 }
@@ -48,13 +48,13 @@ return (result);
  */
 void print_num(int *num, int len)
 {
-int i;
-for (i = 0; i < len && num[i] == 0; i++)
+int a;
+for (a = 0; a < len && num[a] == 0; a++)
 ;
-if (i == len)
+if (a == len)
 putchar('0');
-for (; i < len; i++)
-putchar(num[i] + '0');
+for (; a < len; a++)
+putchar(num[a] + '0');
 putchar('\n');
 }
 /**
@@ -67,7 +67,7 @@ putchar('\n');
 int main(int argc, char **argv)
 {
 char *num1, *num2;
-int len1, len2, *result, i;
+int len1, len2, *result, a;
 if (argc != 3)
 {
 printf("Error\n");
@@ -75,24 +75,24 @@ return (98);
 }
 num1 = argv[1];
 num2 = argv[2];
-for (i = 0; num1[i] != '\0'; i++)
+for (a = 0; num1[a] != '\0'; a++)
 {
-if (!_isdigit(num1[i]))
-{
-printf("Error\n");
-return (98);
-}
-}
-len1 = i;
-for (i = 0; num2[i] != '\0'; i++)
-{
-if (!_isdigit(num2[i]))
+if (!_isdigit(num1[a]))
 {
 printf("Error\n");
 return (98);
 }
 }
-len2 = i;
+len1 = a;
+for (a = 0; num2[a] != '\0'; a++)
+{
+if (!_isdigit(num2[a]))
+{
+printf("Error\n");
+return (98);
+}
+}
+len2 = a;
 result = mul(num1, len1, num2, len2);
 if (result == NULL)
 return (98);
