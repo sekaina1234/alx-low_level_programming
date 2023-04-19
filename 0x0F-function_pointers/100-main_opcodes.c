@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 /**
- * main - prints the opcodes of its own main function
- * @argc: number of arguments passed to the program
- * @argv: array of arguments passed to the program
+ * main - ...
+ * @argc: ...
+ * @argv: ...
  *
- * Return: 0 on success, 1 if number of arguments is incorrect,
- *         2 if number of bytes is negative
+ * Return: ...
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-int i, num_bytes;
+int num_bytes, j;
+char *arr;
 if (argc != 2)
 {
 printf("Error\n");
@@ -22,8 +22,15 @@ if (num_bytes < 0)
 printf("Error\n");
 return (2);
 }
-for (i = 0; i < num_bytes; i++)
-printf("%02x ", *((unsigned char *)main + i));
-printf("\n");
+arr = (char *)main;
+for (j = 0; j < num_bytes; j++)
+{
+if (j == num_bytes - 1)
+{
+printf("%02hhx\n ", arr[j]);
+break;
+}
+printf("%02hhx", arr[j]);
+}
 return (0);
 }
