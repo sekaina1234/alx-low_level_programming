@@ -10,8 +10,8 @@ void print_opcodes(char *addr, int len);
  */
 int main(int argc, char *argv[])
 {
-int num_bytes;
-char *addr = (char *)main;
+int num_bytes, i;
+char *addr;
 if (argc != 2)
 {
 printf("Error\n");
@@ -21,20 +21,17 @@ num_bytes = atoi(argv[1]);
 if (num_bytes < 0)
 {
 printf("Error\n");
-return (2);
+exit(2);
 }
-print_opcodes(addr, num_bytes);
-return (0);
-}
-/**
- * print_opcodes - prints the opcodes of a given address
- * @addr: the starting address to print from
- * @len: the number of bytes to print
- */
-void print_opcodes(char *addr, int len)
+addr = (char *)main;
+for (i = 0; i < num_bytes; i++)
 {
-int i;
-for (i = 0; i < len; i++)
-printf("%02hhx ", *(addr + i));
-printf("\n");
+if (i == num_bytes - 1)
+{
+printf("%02hhx\n", (addr[i]));
+break;
+}
+printf("%02hhx ", addr[i]);
+}
+return (0);
 }
