@@ -9,28 +9,25 @@
  */
 int main(int argc, char *argv[])
 {
-int num_bytes, j;
-char *arr;
+int num, j;
 if (argc != 2)
 {
 printf("Error\n");
 return (1);
 }
-num_bytes = atoi(argv[1]);
-if (num_bytes < 0)
+num = atoi(argv[1]);
+if (num < 0)
 {
 printf("Error\n");
-return (2);
+exit(2);
 }
-arr = (char *)main;
-for (j = 0; j < num_bytes; j++)
+for (j = 0; j < num; j++)
 {
-if (j == num_bytes - 1)
-{
-printf("%02hhx\n ", arr[j]);
-break;
-}
-printf("%02hhx", arr[j]);
+printf("%02hhx\n ", *((char *)main + j));
+if (j < num - 1)
+printf(" ");
+else
+printf("\n");
 }
 return (0);
 }
