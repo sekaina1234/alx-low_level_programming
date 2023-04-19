@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 /**
- * main - ...
- * @argc: ...
- * @argv: ...
+ * main - Entry point
+ * @argc: the number of parameters.
+ * @argv: the parameters in the case the number of bytes.
  *
- * Return: ...
+ * Return: 0 in success
  */
 int main(int argc, char *argv[])
 {
