@@ -1,22 +1,22 @@
 #include "lists.h"
-#include <string.h>
 /**
- * main - ...
+ * add_nodeint - ...
+ *
+ * @head: ...
+ * @n: ...
  *
  * Return: ...
  */
-int main(void)
+listint_t *add_nodeint(listint_t **head, const int n)
 {
-listint_t *head;
-head = NULL;
-add_nodeint(&head, 0);
-add_nodeint(&head, 1);
-add_nodeint(&head, 2);
-add_nodeint(&head, 3);
-add_nodeint(&head, 4);
-add_nodeint(&head, 98);
-add_nodeint(&head, 402);
-add_nodeint(&head, 1024);
-print_listint(head);
-return (0);
+listint_t *new;
+if (!head)
+return (NULL);
+new = malloc(sizeof(listint_t));
+if (!new)
+return (NULL);
+new->n = n;
+new->next = *head;
+*head = new;
+return (new);
 }
