@@ -1,35 +1,26 @@
 #include "lists.h"
-#include <stdlib.h>
-#include <stdio.h>
-#define HASH_SIZE 1024
 /**
  * free_listint_safe - ...
  * @h: ...
+ *
  * Return: ...
  */
 size_t free_listint_safe(listint_t **h)
 {
-size_t c = 0;
-listint_t *cu, *s;
-unsigned long int hash;
-if (h == NULL)
+size_t s = 0;
+listint_t *c, *t;
+if (h == NULL || *h == NULL)
 return (0);
-while (*h != NULL)
+c = *h;
+while (c != NULL)
 {
-cu = *h;
-hash = (unsigned long int)cu % HASH_SIZE;
-for (s = cu->next; s != NULL; s = s->next)
-{
-if ((unsigned long int)s % HASH_SIZE == hash)
-{
+s++;
+t = c;
+c = c->next;
+free(t);
+if (t <= c)
+break;
+}
 *h = NULL;
-return (c);
-}
-}
-*h = cu->next;
-cu->next = NULL;
-free(cu);
-c++;
-}
-return (c);
+return (s);
 }
