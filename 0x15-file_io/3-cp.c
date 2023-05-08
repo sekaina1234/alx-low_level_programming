@@ -1,58 +1,58 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <fcntl.h>
 #include <unistd.h>
-#include "main.h"
-#define BUFSIZE 1024
+#include <fcntl.h>
+#include <errno.h>
 /**
- * main - ...
+ * error - ...
+ * @exit_code: ...
+ * @format: ...
+ * @...: ...
  *
  * Return: ...
  */
-int main(int argc, char *argv[])
+void error(int exit_code, char *format, ...)
 {
-int file_f, file_t, read_r, write_r;
-char b[BUFSIZE];
+va_list args;
+va_start(args, format);
+dprintf(STDERR_FILENO, "Error: ");
+vdprintf(STDERR_FILENO, format, args);
+dprintf(STDERR_FILENO, "\n");
+va_end(args);
+exit(exit_code);
+}
+/**
+ * main - ...
+ * @argc: ...
+ * @argv: ...
+ *
+ * Return: ...
+ */
+int main(int argc, char **argv)
+{
+int fd_f, fd_t, r, w;
+char buf[1024];
 if (argc != 3)
-{
-dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-exit(97);
+error(97, "Usage: cp file_from file_to");
+fd_f = open(argv[1], O_RDONLY);
+if (fd_f == -1)
+error(98, "Can't read from file %s", argv[1]);
+fd_t = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+if (fd_t == -1)
+error(99, "Can't write to %s", argv[2]);
+do {
+r = read(fd_f, buf, 1024);
+if (r == -1)
+error(98, "Can't read from file %s", argv[1]);
+w = write(fd_t, buf, r);
+if (w == -1)
+error(99, "Can't write to %s", argv[2]);
 }
-file_f = open(argv[1], O_RDONLY);
-if (file_f == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-exit(98);
-}
-file_t = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
-if (file_t == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-exit(99);
-}
-while ((read_r = read(file_f, b, BUFSIZE)) > 0)
-{
-write_r = write(file_t, b, read_r);
-if (write_r == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-exit(99);
-}
-}
-if (read_r == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-exit(98);
-}
-if (close(file_f) == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_f);
-exit(100);
-}
-if (close(file_t) == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_t);
-exit(100);
-}
+while (r > 0);
+if (close(fd_f) == -1)
+error(100, "Can't close fd %d", fd_f);
+if (close(fd_t) == -1)
+error(100, "Can't close fd %d", fd_t);
 return (0);
+}
 }
