@@ -4,30 +4,30 @@
 #include <fcntl.h>
 void close_file(int fd);
 /**
- * close_file - Closes file descriptors.
- * @fd: The file descriptor to be closed.
+ * close_file - ...
+ * @fd: ...
  */
 void close_file(int fd)
 {
-int c;
-c = close(fd);
-if (c == -1)
+int d;
+d = close(fd);
+if (d == -1)
 {
 dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 exit(100);
 }
 }
 /**
- * main - Copies the contents of a file to another file.
- * @argc: The number of arguments supplied to the program.
- * @argv: An array of pointers to the arguments.
+ * main - ...
+ * @argc: ...
+ * @argv: ...
  *
- * Return: 0 on success.
+ * Return: ...
  *
- * Description: If the argument count is incorrect - exit code 97.
- * If file_from does not exist or cannot be read - exit code 98.
- * If file_to cannot be created or written to - exit code 99.
- * If file_to or file_from cannot be closed - exit code 100.
+ * Description: If the argument count is incorrect - ....
+ * If file_from does not exist or cannot be read - ...
+ * If file_to cannot be created or written to - ...
+ * If file_to or file_from cannot be closed - ...
  */
 int main(int argc, char *argv[])
 {
