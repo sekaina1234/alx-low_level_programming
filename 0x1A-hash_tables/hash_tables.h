@@ -1,9 +1,5 @@
 #ifndef HASH_TABLES_H
 #define HASH_TABLES_H
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "hash_tables.h"
 unsigned long int hash_djb2(const unsigned char *str);
 /**
  * struct hash_node_s - Node of a hash table
