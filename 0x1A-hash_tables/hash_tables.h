@@ -1,6 +1,5 @@
 #ifndef HASH_TABLES_H
 #define HASH_TABLES_H
-unsigned long int hash_djb2(const unsigned char *str);
 /**
  * struct hash_node_s - Node of a hash table
  * @key: The key, string
@@ -27,7 +26,7 @@ typedef struct hash_table_s
 	unsigned long int size;
 	hash_node_t **array;
 } hash_table_t;
-
+unsigned long int hash_djb2(const unsigned char *str);
 hash_table_t *hash_table_create(unsigned long int size);
 unsigned long int key_index(const unsigned char *key, unsigned long int size);
 int hash_table_set(hash_table_t *ht, const char *key, const char *value);
