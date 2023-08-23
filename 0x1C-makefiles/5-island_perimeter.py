@@ -1,22 +1,23 @@
 #!/usr/bin/python3
-"""
-5-island_perimeter
+"""island Perimeter
 """
 
 def island_perimeter(grid):
+    """returns the perimeter of the island described in grid"""
     perimeter = 0
-    rows = len(grid)
-    cols = len(grid[0])
-
-    for row in range(rows):
-        for col in range(cols):
-            if grid[row][col] == 1:
-                perimeter += 4
-                if row > 0 and grid[row - 1][col] == 1:
-                    perimeter -= 2
-                if col > 0 and grid[row][col - 1] == 1:
-                    perimeter -= 2
-
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            if grid[i][j] == 0:
+                continue
+            perimeter += 4
+            if i > 0:
+                perimeter -= grid[i - 1][j]
+            if i < len(grid) - 1:
+                perimeter -= grid[i + 1][j]
+            if j > 0:
+                perimeter -= grid[i][j - 1]
+            if j < len(grid[0]) - 1:
+                perimeter -= grid[i][j + 1]
     return perimeter
 
 if __name__ == "__main__":
